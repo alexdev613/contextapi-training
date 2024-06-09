@@ -8,6 +8,7 @@ type UserContextData = {
   aluno: string;
   qtdAlunos: number;
   mudaNome: (nome: string) => void;
+  novoAluno: () => void;
 }
 
 export const UserContext = createContext({} as UserContextData);
@@ -21,8 +22,14 @@ function UserProvider({children}: UserProviderProps) {
     setAluno(nome);
   }
 
+  function novoAluno() {
+    setQtdAlunos(alunos => alunos + 1);
+  }
+
   return (
-    <UserContext.Provider value={{ aluno, qtdAlunos, mudaNome }}>
+    <UserContext.Provider
+      value={{ aluno, qtdAlunos, mudaNome, novoAluno }}
+    >
       {children}
     </UserContext.Provider>
   )
